@@ -1,0 +1,18 @@
+import matplotlib.pyplot as fig
+import pandas_datareader as web
+import datetime as dt
+
+#i'm brazilian because of that the names of variables are in portuguese.
+
+inicio = dt.datetime(2019,1,1) # format(aa/mm/dd)
+fim = dt.datetime(2021,1,1) #format(aa/mm/dd)
+acoes = ['JHSF3.SA','BRML3.SA','MULT3.SA'] # Here we input the stock names 
+df = web.get_data_yahoo(acoes,inicio,fim, interval = 'd') # interval = 'm' = mês , interval = 'w' = semana e para dia basta apagar interval
+
+
+dados=df['Close'].plot(style=['-','--','-.'],color=['r','b','k'],lw=1) #Here we just change the style,colors and more
+dados.set_xlabel('Data',fontsize=14) #Here we change the name of axis x
+dados.set_ylabel('Ações',fontsize=14) #Here we change the name of axis y
+fig.grid() #Here we put the grid of the graphic
+fig.title('JHSF3  BRML3 MULT3 (JAN 2029 ~ SET 2021)',fontsize=14,weight='bold') #Here we change de name of the plot and more.
+df['Close'].to_excel('cotacao2.xlsx', sheet_name='cotacao') #Here we save to xlsx formact
