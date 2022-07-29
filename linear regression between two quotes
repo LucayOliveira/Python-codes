@@ -3,17 +3,25 @@ import datetime as dt
 import pandas_datareader as web
 import pandas as pd
 
-#-----------------------------------------------------
+
+#---------------CRIANDO O DF------------------------
 inicio = dt.datetime(2019,1,1)
 fim = dt.datetime(2021,10,4)
 df1=web.DataReader('JHSF3.SA','yahoo',inicio,fim)
 df2=web.DataReader('VALE3.SA','yahoo',inicio,fim)
-#-------------REGRESSÃO LINEAR------------------------
+#---------------------------------------------------
+
+#---------------REGRESSÃO LINEAR--------------------
 correlacao=df1.corrwith(df2,axis = 0)
 dados=sns.regplot(df1['Adj Close'],df2['Adj Close'],color = 'black')
-#-----------------DESIGN------------------------------
+#---------------------------------------------------
+
+#---------------DESIGN------------------------------
 dados.set_xlabel('JHSF3',fontsize=15)
 dados.set_ylabel('VALE3',fontsize=15)
 dados.set_title('REGRESSÃO LINEAR JHSF3 E VALE3 (JAN 2019 ~ SET 2021)',fontsize=18)
-#-----------------------------------------------------
+#---------------------------------------------------
+
+#---------------PRINT GRAFICO-----------------------
 print(correlacao)
+#---------------------------------------------------
